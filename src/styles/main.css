@@ -10,11 +10,28 @@ body {
 	@apply bg-cyan-light;
 }
 main {
-	@apply bg-white;
+	@apply bg-white rounded-xl px-6 py-8 flex flex-col gap-8;
 }
 .number_field {
-	@apply bg-cyan-very_light;
+	@apply bg-cyan-very_light flex justify-between p-2 text-center items-center rounded-md mt-2;
+}
+.number_field span {
+	@apply text-3xl text-cyan-very_dark;
 }
 h2 {
 	@apply text-cyan-dark;
+}
+.money {
+	@apply flex flex-row justify-between;
+}
+.title {
+	@apply flex flex-col text-white;
+}
+.title {
+}
+h4 {
+	@apply text-cyan-dark text-sm;
+}
+.money span {
+	@apply text-cyan-strong text-3xl;
 }

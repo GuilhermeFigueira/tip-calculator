@@ -9,6 +9,7 @@ module.exports = {
 			colors: {
 				white: "hsl(0, 0%, 100%)",
 				cyan: {
+					strong: "hsl(172, 67%, 45%)",
 					very_dark: "hsl(183, 100%, 15%)",
 					dark: "hsl(186, 14%, 43%)",
 					gray: "hsl(184, 14%, 56%)",

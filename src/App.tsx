@@ -1,6 +1,8 @@
+import { CurrencyDollar, User } from "phosphor-react";
+
 function App() {
 	return (
-		<div>
+		<div className="grid grid-rows-[10%_1fr] h-screen">
 			<h1>
 				SPLI
 				<br />
@@ -9,28 +11,55 @@ function App() {
 			<main>
 				<div>
 					<h2>Bill</h2>
-					<div className="number_field">$ 0</div>
+					<div className="number_field">
+						<CurrencyDollar
+							size={18}
+							className="text-cyan-gray"
+							weight="bold"
+						/>
+						<span>0</span>
+					</div>
 				</div>
 				<div>
 					<h2>Select Tip %</h2>
-					<div>5% 10% 15% 25% 50% Custom</div>
+					<div>
+						<Percentage>5%</Percentage>
+						<Percentage>10%</Percentage>
+						<Percentage>15%</Percentage>
+						<Percentage>25%</Percentage>
+						<Percentage>50%</Percentage>
+						<Percentage>Custom</Percentage>
+					</div>
 				</div>
 				<div>
 					<h2>Number of People</h2>
-					<div className="number_field"> 5</div>
+					<div className="number_field">
+						<User
+							size={18}
+							className="text-cyan-gray"
+							weight="fill"
+						/>
+						<span>5</span>
+					</div>
 				</div>
-				<div>
-					<div>
-						<h3>Tip Amount</h3>
-						<h4>/ person</h4>
-						<div>$0,00</div>
+				<div className="bg-cyan-very_dark p-4 rounded-xl">
+					<div className="money">
+						<div className="title">
+							<h3>Tip Amount</h3>
+							<h4>/ person</h4>
+						</div>
+						<span>$0,00</span>
 					</div>
-					<div>
-						<h3>Total</h3>
-						<h4>/ person</h4>
-						<div>$0,00</div>
+					<div className="money">
+						<div className="title">
+							<h3>Total</h3>
+							<h4>/ person</h4>
+						</div>
+						<span>$0,00</span>
 					</div>
-					<button>Reset</button>
+					<button className="bg-cyan-strong text-cyan-very_dark w-full rounded-sm">
+						RESET
+					</button>
 				</div>
 
 				<div className="text-center pt-4">
