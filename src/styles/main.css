@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: subpixel-antialiased;
+	@apply font-sans;
+}
+body {
+	@apply bg-cyan-light;
+}
+main {
+	@apply bg-white;
+}
+.number_field {
+	@apply bg-cyan-very_light;
+}
+h2 {
+	@apply text-cyan-dark;
+}
