@@ -10,7 +10,7 @@ body {
 	@apply bg-cyan-light;
 }
 main {
-	@apply bg-white rounded-xl px-6 py-8 flex flex-col gap-8;
+	@apply bg-white rounded-xl px-8 py-8 flex flex-col gap-8;
 }
 .number_field {
 	@apply bg-cyan-very_light flex justify-between p-2 text-center items-center rounded-md mt-2;
