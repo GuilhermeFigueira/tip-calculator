@@ -1,7 +1,11 @@
 import { CurrencyDollar, User } from "phosphor-react";
-import Percentage from "./components/Percentage";
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { useState } from "react";
 
 function App() {
+	const [percentage, setPercentage] = useState("5");
+	console.log(percentage);
+
 	return (
 		<div className="grid grid-rows-[17%_1fr] h-screen">
 			<h1 className="text-center m-auto text-2xl text-cyan-very_dark spacing tracking-[10px]">
@@ -19,21 +23,67 @@ function App() {
 								className="text-cyan-gray"
 								weight="bold"
 							/>
-							<span>0</span>
+							<input
+								type="number"
+								className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
+								placeholder="0"
+							/>
 						</div>
 					</div>
 					<div>
 						<h2>Select Tip %</h2>
-						<div className="grid grid-cols-[repeat(auto-fit,_minmax(8rem,_1fr))] gap-4 mt-2 transition-all">
-							<Percentage value="5%">5%</Percentage>
-							<Percentage value="10%">10%</Percentage>
-							<Percentage value="15%">15%</Percentage>
-							<Percentage value="25%">25%</Percentage>
-							<Percentage value="50%">50%</Percentage>
-							<Percentage value="" custom={true}>
-								Custom
-							</Percentage>
-						</div>
+						<ToggleGroup.Root
+							value={percentage}
+							className="ToggleGroup"
+							type="single"
+							onValueChange={(percentage) => {
+								if (percentage) setPercentage(percentage);
+							}}
+						>
+							<ToggleGroup.Item
+								className="ToggleGroupItem"
+								value="5"
+							>
+								5%
+							</ToggleGroup.Item>
+							<ToggleGroup.Item
+								className="ToggleGroupItem"
+								value="10"
+							>
+								10%
+							</ToggleGroup.Item>
+							<ToggleGroup.Item
+								className="ToggleGroupItem"
+								value="15"
+							>
+								15%
+							</ToggleGroup.Item>
+							<ToggleGroup.Item
+								className="ToggleGroupItem"
+								value="25"
+							>
+								25%
+							</ToggleGroup.Item>
+							<ToggleGroup.Item
+								className="ToggleGroupItem"
+								value="50"
+							>
+								50%
+							</ToggleGroup.Item>
+							<ToggleGroup.Item
+								className="ToggleGroupItem"
+								value={percentage}
+							>
+								<input
+									type="number"
+									placeholder="Custom %"
+									className="w-full placeholder:text-center placeholder:text-cyan-dark"
+									onChange={(event) => {
+										setPercentage(event.target.value);
+									}}
+								/>
+							</ToggleGroup.Item>
+						</ToggleGroup.Root>
 					</div>
 					<div>
 						<h2>Number of People</h2>
@@ -43,11 +93,15 @@ function App() {
 								className="text-cyan-gray"
 								weight="fill"
 							/>
-							<span>5</span>
+							<input
+								type="number"
+								className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
+								placeholder="0"
+							/>
 						</div>
 					</div>
 				</div>
-				<div className="bg-cyan-very_dark p-4 rounded-xl">
+				<div className="bg-cyan-very_dark p-6 pt-10  rounded-xl flex flex-col gap-7">
 					<div className="money">
 						<div className="title">
 							<h3>Tip Amount</h3>
@@ -62,7 +116,7 @@ function App() {
 						</div>
 						<span>$0,00</span>
 					</div>
-					<button className="bg-cyan-strong text-cyan-very_dark w-full rounded-sm">
+					<button className="bg-cyan-strong text-cyan-very_dark w-full rounded-md p-3 text-xl hover:bg-[#9fe8df]">
 						RESET
 					</button>
 				</div>

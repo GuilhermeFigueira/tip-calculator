@@ -12,8 +12,11 @@ body {
 main {
 	@apply bg-white rounded-xl px-8 py-8 flex flex-col gap-8;
 }
+input {
+	@apply bg-transparent focus:outline-none text-cyan-very_dark text-right;
+}
 .number_field {
-	@apply bg-cyan-very_light flex justify-between p-2 text-center items-center rounded-md mt-2;
+	@apply bg-cyan-very_light flex justify-between p-2 text-center items-center rounded-md mt-2 focus-within:ring-2 focus-within:ring-cyan-strong;
 }
 .number_field span {
 	@apply text-3xl text-cyan-very_dark;
@@ -22,7 +25,7 @@ h2 {
 	@apply text-cyan-dark;
 }
 .money {
-	@apply flex flex-row justify-between;
+	@apply flex flex-row justify-between items-center;
 }
 .title {
 	@apply flex flex-col text-white;
@@ -34,4 +37,23 @@ h4 {
 }
 .money span {
 	@apply text-cyan-strong text-3xl;
+}
+.ToggleGroup {
+	@apply grid grid-cols-[repeat(auto-fit,_minmax(8rem,_1fr))] gap-4 mt-2 transition-all;
+}
+
+.ToggleGroupItem {
+	@apply text-2xl text-center rounded-lg p-2 transition-all  bg-cyan-very_dark text-white hover:bg-[#9fe8df] hover:text-cyan-very_dark hover:cursor-pointer;
+}
+
+.ToggleGroupItem:last-child {
+	@apply bg-cyan-very_light text-cyan-dark focus-within:ring-2 focus-within:ring-cyan-strong;
+}
+
+.ToggleGroupItem:last-child[data-state="on"] {
+	@apply bg-cyan-very_light text-cyan-dark focus-within:ring-2 focus-within:ring-cyan-strong;
+}
+
+.ToggleGroupItem[data-state="on"] {
+	@apply bg-cyan-strong text-cyan-very_dark;
 }
