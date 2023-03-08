@@ -9,6 +9,8 @@ function App() {
 		watch,
 		control,
 		trigger,
+		reset,
+		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -16,6 +18,9 @@ function App() {
 			people: 0,
 		},
 	});
+	const sendForm = (data: any) => {
+		console.log(data);
+	};
 	const [percentage, setPercentage] = useState("5");
 
 	let tipAmount =
@@ -32,9 +37,12 @@ function App() {
 				<br />
 				TTER
 			</h1>
-			<form action="">
-				<main className="grid grid-flow-row">
-					<div className="grid grid-flow-row gap-8">
+			<form
+				onSubmit={handleSubmit(sendForm)}
+				className="flex items-start justify-center md:pt-20"
+			>
+				<main className="grid grid-flow-row md:grid-flow-col md:max-w-[56rem]">
+					<div className="grid grid-flow-row  gap-8">
 						<div>
 							<div className="flex flex-row justify-between">
 								<h2>Bill</h2>
@@ -182,56 +190,63 @@ function App() {
 							</div>
 						</div>
 					</div>
-					<div className="bg-cyan-very_dark p-6 pt-10  rounded-xl flex flex-col gap-7">
-						<div className="money">
-							<div className="title">
-								<h3>Tip Amount</h3>
-								<h4>/ person</h4>
+					<div className="bg-cyan-very_dark p-6 pt-10  rounded-xl flex flex-col gap-7 justify-between">
+						<div className="flex flex-col gap-7">
+							<div className="money">
+								<div className="title">
+									<h3>Tip Amount</h3>
+									<h4>/ person</h4>
+								</div>
+								<span>{`$ ${
+									tipAmount == Infinity ||
+									Number.isNaN(tipAmount) ||
+									tipAmount <= 0
+										? "0.00"
+										: tipAmount
+								}`}</span>
 							</div>
-							<span>{`$ ${
-								tipAmount == Infinity ||
-								Number.isNaN(tipAmount) ||
-								tipAmount <= 0
-									? "0.00"
-									: tipAmount
-							}`}</span>
-						</div>
-						<div className="money px-0">
-							<div className="title">
-								<h3>Total</h3>
-								<h4>/ person</h4>
+							<div className="money px-0">
+								<div className="title">
+									<h3>Total</h3>
+									<h4>/ person</h4>
+								</div>
+
+								<span>{`$ ${
+									total == Infinity ||
+									Number.isNaN(total) ||
+									total <= 0
+										? "0.00"
+										: total
+								}`}</span>
 							</div>
-
-							<span>{`$ ${
-								total == Infinity ||
-								Number.isNaN(total) ||
-								total <= 0
-									? "0.00"
-									: total
-							}`}</span>
 						</div>
-						<button className="bg-cyan-strong text-cyan-very_dark w-full rounded-md p-3 text-xl hover:bg-[#9fe8df]">
-							RESET
-						</button>
-					</div>
-
-					<div className="text-center pt-4">
-						Challenge by{" "}
-						<a
-							href="https://www.frontendmentor.io?ref=challenge"
-							target="_blank"
-						>
-							Frontend Mentor
-						</a>
-						. Coded by{" "}
-						<a
-							href="https://github.com/guilhermefigueira"
-							target="_blank"
-							className="text-transparent bg-clip-text bg-gradient-to-r from-rose-700 to-sky-700 font-bold hover:text-lg hover:tracking-widest transition-all "
-						>
-							Guilherme Figueira
-						</a>
-						.
+						<div>
+							<button
+								onClick={() => reset()}
+								type="reset"
+								className="bg-cyan-strong text-cyan-very_dark w-full rounded-md p-3 text-xl hover:bg-[#9fe8df]"
+							>
+								RESET
+							</button>
+							<div className="text-center pt-4">
+								Challenge by{" "}
+								<a
+									href="https://www.frontendmentor.io?ref=challenge"
+									target="_blank"
+								>
+									Frontend Mentor
+								</a>
+								. Coded by{" "}
+								<a
+									href="https://github.com/guilhermefigueira"
+									target="_blank"
+									className="text-transparent bg-clip-text bg-gradient-to-r from-rose-700 to-sky-700 font-bold hover:text-lg hover:tracking-widest transition-all "
+								>
+									Guilherme Figueira
+								</a>
+								.
+							</div>
+						</div>
 					</div>
 				</main>
 			</form>

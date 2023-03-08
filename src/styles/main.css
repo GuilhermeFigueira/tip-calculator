@@ -39,7 +39,7 @@ h4 {
 	@apply text-cyan-dark text-sm;
 }
 .money span {
-	@apply text-cyan-strong text-3xl;
+	@apply text-cyan-strong text-3xl md:text-5xl;
 }
 .ToggleGroup {
 	@apply grid grid-cols-[repeat(auto-fit,_minmax(8rem,_1fr))] gap-4 mt-2 transition-all;
