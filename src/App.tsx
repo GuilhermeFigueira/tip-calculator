@@ -2,22 +2,28 @@ import { CurrencyDollar, User } from "phosphor-react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { NumericFormat, PatternFormat } from "react-number-format";
+import { NumericFormat } from "react-number-format";
 
 function App() {
 	const {
-		register,
 		watch,
 		control,
 		trigger,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			bill: "",
+			bill: 0,
+			people: 0,
 		},
 	});
 	const [percentage, setPercentage] = useState("5");
-	// console.log(percentage);
+
+	let tipAmount =
+		(watch("bill") * parseInt(percentage)) / 100 / watch("people");
+
+	let total = watch("bill") / watch("people") + tipAmount;
+
+	console.log(total);
 
 	return (
 		<div className="grid grid-rows-[17%_1fr] h-screen">
@@ -30,57 +36,50 @@ function App() {
 				<main className="grid grid-flow-row">
 					<div className="grid grid-flow-row gap-8">
 						<div>
-							<h2>Bill</h2>
-							<div className="number_field">
+							<div className="flex flex-row justify-between">
+								<h2>Bill</h2>
+								<h5>{errors.bill?.message}</h5>
+							</div>
+							<div
+								className={`number_field ${
+									errors.bill?.message == undefined
+										? ""
+										: "focus-within:ring-red-400"
+								}`}
+							>
 								<CurrencyDollar
 									size={18}
 									className="text-cyan-gray"
 									weight="bold"
 								/>
 								<Controller
+									render={({ field }) => (
+										<NumericFormat
+											placeholder="0"
+											allowNegative={false}
+											fixedDecimalScale
+											allowLeadingZeros={false}
+											decimalScale={2}
+											decimalSeparator="."
+											className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
+											onKeyDown={() => trigger("bill")}
+											onKeyUp={() => trigger("bill")}
+											{...field}
+										/>
+									)}
+									name="bill"
 									control={control}
-									{...register("bill", {
+									rules={{
 										maxLength: {
 											value: 10,
 											message: "Max length is 10 digits",
 										},
 										min: {
-											value: 1,
-											message: "Can't be 0",
+											value: 0.01,
+											message: "Can't be zero",
 										},
-									})}
-									render={() => (
-										<NumericFormat
-											placeholder="0"
-											allowNegative={false}
-											fixedDecimalScale
-											decimalScale={2}
-											decimalSeparator=","
-											thousandSeparator="."
-											className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
-										/>
-									)}
+									}}
 								/>
-								<span>{errors.bill?.message}</span>
-								{/* <input
-									type="number"
-									{...register("cvc", {
-										required: "Can't be blank",
-										minLength: {
-											value: 3,
-											message: "Please enter a valid CVC",
-										},
-										maxLength: {
-											value: 3,
-											message: "Please enter a valid CVC",
-										},
-										max: {
-											value: 999,
-											message: "Please enter a valid CVC",
-										},
-									})}
-									placeholder="e.g 123"
-								/> */}
 							</div>
 						</div>
 						<div>
@@ -139,17 +138,46 @@ function App() {
 							</ToggleGroup.Root>
 						</div>
 						<div>
-							<h2>Number of People</h2>
-							<div className="number_field">
+							<div className="flex flex-row justify-between">
+								<h2>Number of people</h2>
+								<h5>{errors.people?.message}</h5>
+							</div>
+							<div
+								className={`number_field ${
+									errors.people?.message == undefined
+										? ""
+										: "focus-within:ring-red-400"
+								}`}
+							>
 								<User
 									size={18}
 									className="text-cyan-gray"
 									weight="fill"
 								/>
-								<input
-									type="number"
-									className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
-									placeholder="0"
+								<Controller
+									render={({ field }) => (
+										<NumericFormat
+											placeholder="0"
+											allowNegative={false}
+											allowLeadingZeros={false}
+											className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
+											onKeyDown={() => trigger("people")}
+											onKeyUp={() => trigger("people")}
+											{...field}
+										/>
+									)}
+									name="people"
+									control={control}
+									rules={{
+										maxLength: {
+											value: 4,
+											message: "Max length is 4 digits",
+										},
+										min: {
+											value: 0.01,
+											message: "Can't be zero",
+										},
+									}}
 								/>
 							</div>
 						</div>
@@ -160,14 +188,27 @@ function App() {
 								<h3>Tip Amount</h3>
 								<h4>/ person</h4>
 							</div>
-							<span>$0,00</span>
+							<span>{`$ ${
+								tipAmount == Infinity ||
+								Number.isNaN(tipAmount) ||
+								tipAmount <= 0
+									? "0.00"
+									: tipAmount
+							}`}</span>
 						</div>
 						<div className="money px-0">
 							<div className="title">
 								<h3>Total</h3>
 								<h4>/ person</h4>
 							</div>
-							<span>$0,00</span>
+
+							<span>{`$ ${
+								total == Infinity ||
+								Number.isNaN(total) ||
+								total <= 0
+									? "0.00"
+									: total
+							}`}</span>
 						</div>
 						<button className="bg-cyan-strong text-cyan-very_dark w-full rounded-md p-3 text-xl hover:bg-[#9fe8df]">
 							RESET

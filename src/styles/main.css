@@ -24,6 +24,9 @@ input {
 h2 {
 	@apply text-cyan-dark;
 }
+h5 {
+	@apply text-red-400;
+}
 .money {
 	@apply flex flex-row justify-between items-center;
 }
