@@ -26,6 +26,9 @@ function App() {
 		(watch("bill") * parseInt(percentage)) / 100 / watch("people");
 	let total = watch("bill") / watch("people") + tipAmount;
 
+	let tipAmountRounded = parseInt(tipAmount.toFixed(2));
+	let totalRounded = parseInt(total.toFixed(2));
+
 	return (
 		<div className="grid grid-rows-[17%_1fr] h-screen">
 			<h1 className="text-center m-auto text-2xl text-cyan-very_dark spacing tracking-[10px]">
@@ -226,11 +229,11 @@ function App() {
 									<h4>/ person</h4>
 								</div>
 								<span>{`$ ${
-									tipAmount == Infinity ||
-									Number.isNaN(tipAmount) ||
-									tipAmount <= 0
+									tipAmountRounded == Infinity ||
+									Number.isNaN(tipAmountRounded) ||
+									tipAmountRounded <= 0
 										? "0.00"
-										: tipAmount
+										: tipAmountRounded
 								}`}</span>
 							</div>
 							<div className="money px-0">
@@ -240,11 +243,11 @@ function App() {
 								</div>
 
 								<span>{`$ ${
-									total == Infinity ||
-									Number.isNaN(total) ||
-									total <= 0
+									totalRounded == Infinity ||
+									Number.isNaN(totalRounded) ||
+									totalRounded <= 0
 										? "0.00"
-										: total
+										: totalRounded
 								}`}</span>
 							</div>
 						</div>
