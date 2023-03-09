@@ -31,11 +31,11 @@ function App() {
 
 	return (
 		<div className="grid grid-rows-[17%_1fr] h-screen">
-			<h1 className="text-center m-auto text-2xl text-cyan-very_dark spacing tracking-[10px]">
+			<header className="text-center m-auto text-2xl text-cyan-very_dark spacing tracking-[10px]">
 				SPLI
 				<br />
 				TTER
-			</h1>
+			</header>
 			<form
 				onSubmit={handleSubmit(sendForm)}
 				className="flex items-start justify-center md:pt-20"
@@ -45,7 +45,9 @@ function App() {
 						<div>
 							<div className="flex flex-row justify-between">
 								<h2>Bill</h2>
-								<h5>{errors.bill?.message}</h5>
+								{errors.bill?.message && (
+									<h5>{errors.bill?.message}</h5>
+								)}
 							</div>
 							<div
 								className={`number_field ${
@@ -63,6 +65,7 @@ function App() {
 									render={({ field }) => (
 										<NumericFormat
 											placeholder="0"
+											typeof="number"
 											allowNegative={false}
 											fixedDecimalScale
 											allowLeadingZeros={false}
@@ -92,7 +95,9 @@ function App() {
 						<div>
 							<div className="flex flex-row justify-between">
 								<h2>Select Tip %</h2>
-								<h5>{errors.percentages?.message}</h5>
+								{errors.percentages?.message && (
+									<h5>{errors.percentages?.message}</h5>
+								)}
 							</div>
 							<ToggleGroup.Root
 								value={percentage}
@@ -140,6 +145,7 @@ function App() {
 										render={({ field }) => (
 											<NumericFormat
 												placeholder="Custom %"
+												typeof="number"
 												allowNegative={false}
 												allowLeadingZeros={false}
 												className="w-full  "
@@ -179,7 +185,9 @@ function App() {
 						<div>
 							<div className="flex flex-row justify-between">
 								<h2>Number of people</h2>
-								<h5>{errors.people?.message}</h5>
+								{errors.people?.message && (
+									<h5>{errors.people?.message}</h5>
+								)}
 							</div>
 							<div
 								className={`number_field ${
@@ -197,6 +205,7 @@ function App() {
 									render={({ field }) => (
 										<NumericFormat
 											placeholder="0"
+											typeof="number"
 											allowNegative={false}
 											allowLeadingZeros={false}
 											className="flex-1 text-right focus-within:outline-none bg-transparent text-2xl "
