@@ -49,12 +49,8 @@ h4 {
 	@apply text-2xl text-center rounded-lg p-2 transition-all  bg-cyan-very_dark text-white hover:bg-[#9fe8df] hover:text-cyan-very_dark hover:cursor-pointer;
 }
 
-.ToggleGroupItem:last-child {
-	@apply bg-cyan-very_light text-cyan-dark  placeholder:text-center placeholder:text-cyan-dark focus-within:ring-cyan-strong;
-}
-
-.ToggleGroupItem:last-child[data-state="on"] {
-	@apply bg-cyan-very_light text-cyan-dark focus-within:ring-2;
+.ToggleGroup input {
+	@apply w-full bg-cyan-very_light text-cyan-dark placeholder:text-center placeholder:text-cyan-dark focus:ring-cyan-strong focus:ring-2 text-2xl text-right rounded-lg p-2 transition-all;
 }
 
 .ToggleGroupItem[data-state="on"] {

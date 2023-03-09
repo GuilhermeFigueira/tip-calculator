@@ -137,49 +137,47 @@ function App() {
 								>
 									50%
 								</ToggleGroup.Item>
-								<ToggleGroup.Item
+								{/* <ToggleGroup.Item
 									className="ToggleGroupItem"
 									value={percentage}
-								>
-									<Controller
-										render={({ field }) => (
-											<NumericFormat
-												placeholder="Custom %"
-												typeof="number"
-												allowNegative={false}
-												allowLeadingZeros={false}
-												className="w-full  "
-												onKeyDown={() =>
-													trigger("percentages")
-												}
-												onKeyUp={() =>
-													trigger("percentages")
-												}
-												onValueChange={(event) => {
-													setPercentage(event.value);
-												}}
-												{...field}
-											/>
-										)}
-										name="percentages"
-										control={control}
-										rules={{
-											maxLength: {
-												value: 3,
-												message:
-													"Max length is 3 digits",
-											},
-											max: {
-												value: 100,
-												message: "Max number is 100",
-											},
-											min: {
-												value: 1,
-												message: "Can't be zero",
-											},
-										}}
-									/>
-								</ToggleGroup.Item>
+								> */}
+								<Controller
+									render={({ field }) => (
+										<NumericFormat
+											placeholder="Custom %"
+											typeof="number"
+											allowNegative={false}
+											allowLeadingZeros={false}
+											onKeyDown={() =>
+												trigger("percentages")
+											}
+											onKeyUp={() =>
+												trigger("percentages")
+											}
+											onValueChange={(event) => {
+												setPercentage(event.value);
+											}}
+											{...field}
+										/>
+									)}
+									name="percentages"
+									control={control}
+									rules={{
+										maxLength: {
+											value: 3,
+											message: "Max length is 3 digits",
+										},
+										max: {
+											value: 100,
+											message: "Max number is 100",
+										},
+										min: {
+											value: 1,
+											message: "Can't be zero",
+										},
+									}}
+								/>
+								{/* </ToggleGroup.Item> */}
 							</ToggleGroup.Root>
 						</div>
 						<div>
