@@ -50,11 +50,11 @@ h4 {
 }
 
 .ToggleGroupItem:last-child {
-	@apply bg-cyan-very_light text-cyan-dark focus-within:ring-2 focus-within:ring-cyan-strong;
+	@apply bg-cyan-very_light text-cyan-dark  placeholder:text-center placeholder:text-cyan-dark focus-within:ring-cyan-strong;
 }
 
 .ToggleGroupItem:last-child[data-state="on"] {
-	@apply bg-cyan-very_light text-cyan-dark focus-within:ring-2 focus-within:ring-cyan-strong;
+	@apply bg-cyan-very_light text-cyan-dark focus-within:ring-2;
 }
 
 .ToggleGroupItem[data-state="on"] {

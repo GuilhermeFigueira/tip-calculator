@@ -16,19 +16,15 @@ function App() {
 		defaultValues: {
 			bill: 0,
 			people: 0,
+			percentages: 0,
 		},
 	});
-	const sendForm = (data: any) => {
-		console.log(data);
-	};
 	const [percentage, setPercentage] = useState("5");
+	const sendForm = (data: any) => {};
 
 	let tipAmount =
 		(watch("bill") * parseInt(percentage)) / 100 / watch("people");
-
 	let total = watch("bill") / watch("people") + tipAmount;
-
-	console.log(total);
 
 	return (
 		<div className="grid grid-rows-[17%_1fr] h-screen">
@@ -91,7 +87,10 @@ function App() {
 							</div>
 						</div>
 						<div>
-							<h2>Select Tip %</h2>
+							<div className="flex flex-row justify-between">
+								<h2>Select Tip %</h2>
+								<h5>{errors.percentages?.message}</h5>
+							</div>
 							<ToggleGroup.Root
 								value={percentage}
 								className="ToggleGroup"
@@ -134,12 +133,41 @@ function App() {
 									className="ToggleGroupItem"
 									value={percentage}
 								>
-									<input
-										type="number"
-										placeholder="Custom %"
-										className="w-full placeholder:text-center placeholder:text-cyan-dark"
-										onChange={(event) => {
-											setPercentage(event.target.value);
+									<Controller
+										render={({ field }) => (
+											<NumericFormat
+												placeholder="Custom %"
+												allowNegative={false}
+												allowLeadingZeros={false}
+												className="w-full  "
+												onKeyDown={() =>
+													trigger("percentages")
+												}
+												onKeyUp={() =>
+													trigger("percentages")
+												}
+												onValueChange={(event) => {
+													setPercentage(event.value);
+												}}
+												{...field}
+											/>
+										)}
+										name="percentages"
+										control={control}
+										rules={{
+											maxLength: {
+												value: 3,
+												message:
+													"Max length is 3 digits",
+											},
+											max: {
+												value: 100,
+												message: "Max number is 100",
+											},
+											min: {
+												value: 1,
+												message: "Can't be zero",
+											},
 										}}
 									/>
 								</ToggleGroup.Item>
